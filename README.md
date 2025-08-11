@@ -13,6 +13,8 @@ This project is at an early stage of development.
 - TTL serial port
 - micro-SD card socket
 - Audio Speaker for ASCII “bell” sound
+- No PAL/GAL/CPLD/FPGA programmable logic required
+- Only two LSTTL parts required.
 
 ## REQUIREMENTS
 
