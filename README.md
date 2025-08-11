@@ -1,22 +1,16 @@
 # Project68
 
-Motorola 68008 single board computer with PIC18F87K22 co-processor.
+Motorola 68008 single board computer with PIC18F87K22 co-processor running uCLinux 4.4
 
-Project 68
-
-
-
-Project 68 is a single board 68008 microprocessor system which runs uCLinux. Features are:
-
-MC68008 CPU clocked at 7.16 mHz
-4 megabytes of SRAM
-Optional overclocking to 14.31818 mHz
-PIC18F87K22 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
-80x25 character black and white ASCII video display (NTSC composite video)
-PS/2 keyboard interface
-TTL serial port
-micro-SD card socket
-Audio Speaker for ASCII “bell” sound
+- MC68008 CPU clocked at 7.16 mHz
+- 4 megabytes of SRAM
+- Optional overclocking to 14.31818 mHz
+- PIC18F87K22 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
+- 80x25 character black and white ASCII video display (NTSC composite video)
+- PS/2 keyboard interface
+- TTL serial port
+- micro-SD card socket
+- Audio Speaker for ASCII “bell” sound
 
 
 CPU
