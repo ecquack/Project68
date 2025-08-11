@@ -19,13 +19,13 @@ The CPU is the 8 bit bus version of the MC68000. It comes in the larger 52 pin P
 
 ## MEMORY
 
-A single 32 megabit 4Mx8 SRAM chip is used.This fills the entire available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind, and no memory mapped I/O.
+A single 32 megabit 4Mx8 SRAM chip is used. This fills the entire available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind, no special addressing hardware at reset, and no memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF. 
 
 ## CO-PROCESSSOR
 
 The PIC 18F87K22 co-processor provides all the processor’s I/O using soft-DMA. When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. Specific addresses in the memory space are designated as I/O registers and are interpreted as such by the co-processor to provide low level BIOS functions. 
 
-At power up the co-processor asserts _HALT and _RESET and then copies the 64K BIOS/LOADER into the SRAM from the upper half of FLASH memory that’s built into the PIC18. It then de-asserts _HALT and _RESET and the MC68008 does a power on self test and then runs the loader. The LOADER loads the RAM filing system from the SD card and starts Linux. 
+At power up the co-processor asserts _HALT and _RESET and then copies up to 64K of BIOS into the SRAM from the upper half of FLASH memory that’s built into the PIC18. It then de-asserts _HALT and _RESET and the MC68008 does a power on self test, then  the BIOS loads the initial RAM filing system from the SD card and starts uCLinux with a busybox shell.
 
 ## PS/2 INTERFACE
 
@@ -33,7 +33,7 @@ Project68 uses the MSSP (synchronous serial port) on the PIC18 and a tight assem
 
 When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
 
-Due to hardware limitations of the MSSP certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another. 
+Due to hardware limitations of the MSSP certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another. You can always use the TTL serial port for the console instead if this limitation is an issue for you.
  
 ## VIDEO DISPLAY
 
@@ -42,11 +42,6 @@ The co-processor is also responsible for generating the 80x25 video display. Thi
 The physical video interface consists of two output pins and a two resistor network that is connected to an RCA jack. One pin is the output of the synchronous serial transmitter, and the other is the software generated sync line, used for both horizontal and vertical sync.
 
 The video display is not interlaced and does not include a colorburst. The 8x8 ROM font consists of the standard printable ASCII characters (codes 32-126), plus a number of special characters (codes 0-31 and 127). The upper 128 characters are reverse video of the lower 128 characters, which is used to generate the cursor.
-
-## ADDRESS SPACE
-
-The address space of the 68008 is filled completely by the 4Mx8 SRAM chip. There is no address decoding and no EPROM, ROM, or FLASH memory on the MC68008 bus.
-There is also no memory mapped I/O. Just an unbroken address space full of zero wait state SRAM.
 
 ## BIOS
 
