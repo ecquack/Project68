@@ -33,7 +33,7 @@ It features:
 
 ## CPU
 
-The CPU is the 8 bit external bus version of the MC68000, the MC68008FN8. It comes in the larger 52 pin PLCC package which can address up to 4 megabytes of memory. The CPU is socketed on the board so that you can use an automated assembly service such as JLC PCB or PCBWAY for all the soldering if you prefer. This is a 16/32 bit CPU internally with a narrow external bus which allows using byte wide external memories.
+The CPU is the 8 bit external bus version of the 68K, the MC68008FN8. It comes in the larger 52 pin PLCC package which can address up to 4 megabytes of memory. The CPU is socketed on the board so that you can use an automated assembly service such as JLC PCB or PCBWAY for all the soldering if you prefer. This is a 16/32 bit CPU internally with a narrow external bus which allows using byte wide external memories.
 
 The parts I have are rated at 8mHz, but 10mHz parts are also available (MC68000FN10). In order to provide an NTSC CCIR-601 video clock, the processor runs at ~7.16mHz. Either speed part can (usually) be successfully overclocked to ~14.318mHz without issue. An overclocking jumper is provided if you feel the need for speed.
 
@@ -134,3 +134,21 @@ I may have a few pre-assembled boards complete with CPUs and SD cards for sale a
 Note that the MC68008FN is no longer in production, but at this time (August, 2025) it is not difficult to find them on eBay for around USD$30 with shipping. 
 
 
+## PROJECT STATUS
+
+The schematic capture is all but complete. I'm planning to try the autorouter on this one, as I would find it tedious to hand route the large memory bus between the three main chips. 
+
+I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26J11 board that I milled on my CNC machine back in the day.
+
+Once the layout is complete I plan to have a pair of assembled boards made for my by JLCPCB.
+
+After that, the next debugging steps are:
+
+0. Blink the LED
+1. Get the video display running
+2. test the keyboard port
+3. bit-bang the memory interface to read and write from the SRAM
+4. load a small test program into the 68K and start it
+5. read and write a block from the SD card
+
+Then comes the work of writing the BIOS and building the linux image.
