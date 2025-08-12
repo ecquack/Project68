@@ -140,5 +140,14 @@ The schematic capture is all but complete. I'm planning to try the autorouter on
 
 I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26K11 board that I milled on my CNC machine back in the day.
 
-Once the layout is complete I plan to have assembled boards made for my by JLCPCB. The first step in debugging is to see if I can bit-bang the memory interface to read and write from the SRAM. The next step is to load a tiny test program into the 68000 to prove that it's working.
+Once the layout is complete I plan to have assembled boards made for my by JLCPCB.
 
+After that, the next debugging steps are:
+
+0. Blink the LED
+1. Get the video display running
+2. test the keyboard port
+3. bit-bang the memory interface to read and write from the SRAM
+4. load a small test program into the 68K and start it
+5. read and write a block from the SD card
+6. 
