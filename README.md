@@ -150,4 +150,5 @@ After that, the next debugging steps are:
 3. bit-bang the memory interface to read and write from the SRAM
 4. load a small test program into the 68K and start it
 5. read and write a block from the SD card
-6. 
+
+Then comes the work of writing the BIOS and building the linux image.
