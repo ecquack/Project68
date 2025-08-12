@@ -6,8 +6,6 @@ It connects directly to a monitor and keyboard and does not require a host compu
 
 The goal was to create a self contained computer using a minimum number of components and tools.
 
-The project is open source. Binaries are provided, but to build the PIC18 firmware from scratch you will need the commercial CSS PICC compiler. 
-
 Special thanks to *crmaykish*, creator of the Mackerel-08 project.
 
 This project is at an early stage of development.
@@ -28,7 +26,7 @@ It features:
 
 ## OPERATING REQUIREMENTS
 
-- Monitor with composite video input
+- Monitor with composite video input (NTSC)
 - PS/2 keyboard
 - 5V 1A power supply
 - SD card with uCLinux image
@@ -37,11 +35,11 @@ It features:
 
 The CPU is the 8 bit external bus version of the MC68000, the MC68008FN8, in the larger 52 pin PLCC package. The CPU is socketed on the board so that you can use an automated assembly service such as JLC PCB or PCBWAY for all the soldering. This is a 16/32 bit CPU internally with a narrow external bus which allows using byte wide external memories.
 
-The parts I have tested are rated at 8mHz. In order to synchronize with the NTSC CCIR-601 video clock, we run the processor at ~7.16mHz There are also MC68008FN10 parts available, rated at 10mHz. Either part can (usually) be successfully overclocked to ~14.318mHz, and a jumper is provided for this if you feel the need for speed.
+The parts I have tested are rated at 8mHz. In order to provide an NTSC CCIR-601 video clock, we run the processor at ~7.16mHz There are also MC68008FN10 parts available, rated at 10mHz. Either part can (usually) be successfully overclocked to ~14.318mHz, and a jumper is provided for this if you feel the need for speed.
 
 ## MEMORY
 
-The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns SRAM chip. This fills the entire available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind,  no special address hardware at reset, and no traditional memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF and a simple _DTACK generator. The SRAM part can be a Renesas RMLV3216AGSA-5S2. You can also use an Alliance AS6C6416-55TIN which is a 64 megabit part, but you will only have access to half the memory. 
+The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns SRAM chip. This fills the *entire* available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind,  no special address hardware at reset, and no traditional memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF and a simple _DTACK generator. The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 source from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, but you will only be utilizing half the memory.
 
 The memory runs at 3.3 volts (there is an LDO regulator on the board) but the I/O pins are TTL compatible for interfacing with the PIC18 and MC68008, with a high logic level of 2.4 volts.
 
@@ -49,25 +47,14 @@ The memory runs at 3.3 volts (there is an LDO regulator on the board) but the I/
 
 The PIC18F87K22 microcontrollre comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
 
-The PIC 18F87K22 co-processor provides all the main processor’s I/O using soft-DMA. When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. Specific addresses in the memory space are designated as I/O registers and are interpreted as such by the co-processor to provide low level BIOS functions. 
+**The PIC 18F87K22 co-processor provides all the main processor’s I/O using soft-DMA.** When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. A few specific addresses in the memory space are designated as I/O command and status registers and are interpreted as such by the co-processor to provide low level BIOS functions for the console, serial port, and SD card. 
 
-At power up the co-processor asserts _HALT and _RESET and then copies up to 64K of BIOS into the SRAM from the upper half of FLASH memory that’s built into the PIC18. It then de-asserts _HALT and _RESET and the MC68008 does a power on self test, then  the BIOS loads the initial RAM filing system from the SD card and starts uCLinux with busybox.
+At power up the co-processor asserts _HALT and _RESET and then copies up to 64K of BIOS into the SRAM from the upper half of FLASH memory that’s built into the PIC18. It then de-asserts _HALT and _RESET and the MC68008 does a power on self test, then  the BIOS loads the initial RAM filing system from the SD card and 
+starts uCLinux.
 
-## PS/2 INTERFACE
-
-The system uses the PIC18 MSSP (synchronous serial port) and a tight assembly language interrupt handler to interface to the PS/2 keyboard. 
-
-When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
-
-Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release.
-
-You can use the TTL serial port for the console if this limitation is an issue for you.
-
-The PS/2 interrupt handler always takes the same number of clock cycles to run, no matter which code path is taken.
- 
 ## VIDEO DISPLAY
 
-The co-processor is also responsible for generating the 80x25 video display. This is done with a *really* tight  horizontal sync interrupt handler written in assembly language. It uses an interleaved character FLASH lookup table with an 8x8 pixel font. One EUSART on the PIC18 is used as a video shift register (nice!), which makes it possible to clock pixels out once per instruction cycle.
+The co-processor is responsible for generating the 80x25 video display. This is done with a *really* tight  horizontal sync interrupt handler written in assembly language. It uses an interleaved character FLASH lookup table with an 8x8 pixel font. One EUSART on the PIC18 is used as a video shift register (nice!), which makes it possible to clock pixels out once per instruction cycle.
 
 Roughly half of the PIC18's SRAM (2K) is dedicated to the video display.
 
@@ -78,6 +65,20 @@ The video display is not interlaced and does not include a colorburst. The 8x8 R
 The HSYNC interrupt handler contains a single NOP instruction (for timing purposes) in the 8 instruction inner loop. There are are not enough spare clock cycles to add any more features.
 
 Most of the co-processor's time is spent generating video. There is a short horizontal blanking period at the end of each line, and there is a longer vertical blanking interval at the end of each video field during which the processor is free to perform other tasks. All video generation (and PS/2 keyboard processing) takes place inside the interrupt handler.
+
+
+## PS/2 INTERFACE
+
+The system uses the PIC18 MSSP (synchronous serial port) in slave mode with a tight assembly language interrupt handler to interface to the PS/2 keyboard. 
+
+When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
+
+Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release.
+
+You can use the TTL serial port for the console if this limitation is an issue for you.
+
+The PS/2 interrupt handler runs during horizontal blanking, and always takes the same number of clock cycles to run, no matter which code path is taken.
+ 
 
 ## SD CARD
 
