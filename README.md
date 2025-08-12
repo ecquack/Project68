@@ -94,12 +94,16 @@ The BIOS provides a few functions to access the console, the serial port, and th
 
 The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to the 68008. This is used by the Linux kernel for timekeeping and task switching. 
 
+## USB SERIAL PORT
+
+A CH340N provides a very basic serial port connection to a host system. The USB connector also provides power to the board.
+
 ## EXPANSION PORT
 
 - TTL serial port (RX, TX, GND)
 - Power (+5V, +3.3V)
 - GPIO digital only (3) 
-- GPIO or analog input (5)
+- GPIO or analog input (4)
 - SPI BUS (shared with SD card)
 
 ## ICSP PORT
