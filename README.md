@@ -26,9 +26,9 @@ It features:
 
 ## OPERATING REQUIREMENTS
 
-- Monitor with composite video input (NTSC)
+- TV or Monitor with composite video input (NTSC)
 - PS/2 keyboard
-- 5V 1A power supply
+- 5V 1A power supply with USB-C cable (phone charger)
 - SD card with uCLinux image
 
 ## CPU
