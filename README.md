@@ -56,7 +56,7 @@ starts uCLinux.
 
 ## VIDEO DISPLAY
 
-The co-processor is responsible for generating the 80x25 video display. This is done with a *really* tight  horizontal sync interrupt handler written in assembly language. It uses an interleaved character FLASH lookup table with an 8x8 pixel font. One EUSART on the PIC18 is used as a video shift register (nice!), which makes it possible to clock pixels out once per instruction cycle.
+**The co-processor is also responsible for generating the 80x25 video display.** This is done with a *really* tight  horizontal sync interrupt handler written in assembly language. It uses an interleaved character FLASH lookup table with an 8x8 pixel font. One EUSART on the PIC18 is used as a video shift register (nice!), which makes it possible to clock pixels out once per instruction cycle.
 
 Roughly half of the PIC18's SRAM (2K) is dedicated to the video display.
 
