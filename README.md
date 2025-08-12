@@ -39,7 +39,9 @@ The parts I have tested are rated at 8mHz. In order to provide an NTSC CCIR-601 
 
 ## MEMORY
 
-The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns SRAM chip. This fills the *entire* available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind,  no special address hardware at reset, and no traditional memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF and a simple _DTACK generator. The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 source from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, but you will only be utilizing half the memory.
+The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns SRAM chip. This fills the *entire* available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind,  no special address hardware at reset, and no traditional memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF and a simple _DTACK generator. 
+
+The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 source from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, but you will only be utilizing half the memory.
 
 The memory runs at 3.3 volts (there is an LDO regulator on the board) but the I/O pins are TTL compatible for interfacing with the PIC18 and MC68008, with a high logic level of 2.4 volts.
 
