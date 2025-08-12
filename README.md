@@ -72,15 +72,14 @@ I do not have a monitor that accepts PAL video to test this with.
 
 ## PS/2 INTERFACE
 
-The system uses the PIC18 MSSP (synchronous serial port) in slave mode with a tight assembly language interrupt handler to interface to the PS/2 keyboard. 
+The system uses the PIC18 MSSP (synchronous serial port) in slave mode with an assembly language interrupt handler to interface to the PS/2 keyboard. 
+The interrupt handler runs during horizontal blanking, and always takes the same number of clock cycles to run, no matter which code path is taken, to avoid disturbing the video output. 
 
 When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
 
-Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release.
-
+Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release. These limitations could be removed with a second PIC18 dedicated to the keyboard. 
 You can use the TTL serial port for the console if this limitation is an issue for you.
 
-The PS/2 interrupt handler runs during horizontal blanking, and always takes the same number of clock cycles to run, no matter which code path is taken.
  
 
 ## SD CARD
