@@ -25,18 +25,12 @@ It features:
 - No PAL/GAL/CPLD/FPGA programmable logic required
 - Only two TTL parts required.
 
-## REQUIREMENTS
+## OPERATING REQUIREMENTS
 
 - Monitor with composite video input
 - PS/2 keyboard
-- 5V power supply
+- 5V 1A power supply
 - SD card with uCLinux image
-
- ## BUILD REQUIREMENTS
- 
-- PIC programmer for initial programming
-- CCS PICC C Compiler (optional if you don't use the pre-built binary)
-- 
 
 ## CPU
 
@@ -113,4 +107,20 @@ For programming the PIC MCU, this 6 pin connector contains PGD, PGC, _MCLR, +5V,
 For higher system performance you could use a second smaller PIC18 (such as a PIC18F27K22) dedicated to generating video. The current system was designed to see how simply a complete 68K computer system could be made, and it uses a minimum number of parts for a system that has its own video and keyboard interfaces. 
 
 A decoded address that causes an interrupt on the PIC18 would eliminate the need for the PIC18 to poll the MC68008's memory. Again, this would increase performance but it would add chips to the design and eat into the memory address space. Two 74HCT30s and a 74HCT00 would suffice, and would eat only 64 bytes from the memory map. 
+
+## BUILD REQUIREMENTS
+ 
+- PIC programmer for initial programming (you can build a very simple bit-banging programmer using a repurposed Arduino)
+- Computer system with MicroSD card interface for preparing the SD card.
+- CCS PICC C Compiler (optional - pre-built binaries are available)
+- X86 Linux system (optional - a pre-built binary is available)
+- KiCAD (optional - Gerber files are provided)
+
+## Pre-assembled boards
+
+I started out with a tube full of sixteen 68008 parts that I got from a Motorola rep back in the '90s. I'm keeping a few chips for myself and my friends, but 
+I may have a few pre-assembled boards complete with CPUs and SD cards for sale at some point. 
+
+Note that the MC68008FN is no longer in production, but at this time (August, 2025) it is not difficult to find them on eBay for around USD$30 with shipping. 
+
 
