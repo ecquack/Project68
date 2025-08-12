@@ -7,6 +7,7 @@ It connects directly to a monitor and keyboard and does not require a host compu
 The goal was to create a self contained computer using a minimum number of components and tools.
 
 The project is open source. Binaries are provided, but to build the PIC18 firmware from scratch you will need the commercial CSS PICC compiler. 
+
 Special thanks to *crmaykish*, creator of the Mackerel-08 project.
 
 This project is at an early stage of development.
