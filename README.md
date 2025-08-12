@@ -140,7 +140,7 @@ The schematic capture is all but complete. I'm planning to try the autorouter on
 
 I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26J11 board that I milled on my CNC machine back in the day.
 
-Once the layout is complete I plan to have assembled boards made for my by JLCPCB.
+Once the layout is complete I plan to have a pair of assembled boards made for my by JLCPCB.
 
 After that, the next debugging steps are:
 
