@@ -41,13 +41,13 @@ The parts I have tested are rated at 8mHz. In order to provide an NTSC CCIR-601 
 
 The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns SRAM chip. This fills the *entire* available address space with SRAM. There is no separate FLASH, EPROM, or ROM memory, no address decoding of any kind,  no special address hardware at reset, and no traditional memory mapped I/O. Just an unbroken sea of RAM from 0-0x3FFFFF and a simple _DTACK generator. 
 
-The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 source from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, but you will only be utilizing half the memory.
+The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 sourced from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, which is actually cheaper, but you will only be utilizing half the memory.
 
 The memory runs at 3.3 volts (there is an LDO regulator on the board) but the I/O pins are TTL compatible for interfacing with the PIC18 and MC68008, with a high logic level of 2.4 volts.
 
 ## CO-PROCESSSOR
 
-The PIC18F87K22 microcontrollre comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
+The PIC18F87K22 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
 
 **The PIC18 co-processor provides all the main processor’s I/O using soft-DMA.** When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. A few specific addresses in the memory space are designated as I/O command and status registers and are interpreted as such by the co-processor to provide low level BIOS functions for the console, serial port, and SD card. 
 
