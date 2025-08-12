@@ -11,6 +11,8 @@ Special thanks to *crmaykish*, creator of the Mackerel-08 project.
 
 This project is at an early stage of development.
 
+It features:
+
 - MC68008 CPU clocked at 7.16 mHz
 - 4 megabytes of SRAM
 - Optional overclocking to 14.31818 mHz
