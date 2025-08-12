@@ -1,0 +1,155 @@
+
+//
+// scan code table 1 is not supported by all keyboards but we like it because
+// you never need the high bit in order to tell which key was pressed.
+//
+// the problem with scan set 1 is that you need the high bit in order to 
+// detect key release which makes typematic autorepeat a real problem.
+//
+// I suppose we can always discard the last instance of a scancode that we receive.
+// so the second time we see a code in a row we ignore it. the third time we see
+// a code it must be typematic so consider it another keypress.
+//
+//
+// the exception to the autorepeat rules would be the modifier
+// keys: SHIFT and CONTROL don't autorepeat.
+//
+
+const char scancode1[]={
+
+0x00,0x00,0x00,0, //0x00
+0x1B,0x00,0x00,0, //0x01 ESCAPE
+'1' ,'!' ,0x00,0, //0x02
+'2' ,'@' ,0x00,0, //0x03
+'3' ,'#' ,0x00,0, //0x04
+'4' ,'$' ,0x00,0, //0x05
+'5' ,'%' ,0x00,0, //0x06
+'6' ,'^' ,0x00,0, //0x07
+'7' ,'&' ,0x00,0, //0x08
+'8' ,'*' ,0x00,0, //0x09
+'9' ,'(' ,0x00,0, //0x0A
+'0' ,')' ,0x00,0, //0x0B
+'-' ,'_' ,0x00,0, //0x0C
+'=' ,'+' ,0x00,0, //0x0D
+0x08,,,, //0x0E BACKSPACE
+0x09,,,, //0x0F TAB
+
+'q','Q',,, //0x10 xMM PREVIOUS TRACK
+'w','W',,, //0x11
+'e','E',0x05,0, //0x12
+'r','R',,, //0x13
+'t','T',,, //0x14
+'y','Y',,, //0x15
+'u','U',,, //0x16
+'i','I',,, //0x17
+'o','O',,, //0x18
+'p','P',,, //0x19 xMM NEXT TRACK
+'[','{',,, //0x1A
+']','}',,, //0x1B
+0x0d,0x0d,0x0d,0, //0x1C ENTER, xKEYPADENTER
+0x00,0x00,0x00,0, //0x1D LCONTROL, xRCTRL
+'a','A',0x01,0, //0x1E
+'s','S',,, //0x1F
+
+'d','D',0x04,0, //0x20
+'f','F',,, //0x21
+'g','G',,, //0x22 xMM PLAY/PAUSE
+'h','H',,, //0x23
+'j','J',,, //0x24 xMM STOP
+'k','K',,, //0x25
+'l','L',,, //0x26
+';',':',,, //0x27
+'\'','|',,, //0x28 SINGLE QUOTE
+'`','~',,, //0x29
+,,,, //0x2A LSHIFT, xPrtScn1
+,,,, //0x2B
+'z','Z',,, //0x2C
+'x','X',,, //0x2D
+'c','C',0x03,0, //0x2E
+'v','V',,, //0x2F
+
+'b','B',0x02,0, //0x30
+'n','N',,, //0x31
+'m','M',,, //0x32
+',','<',,, //0x33 COMMA
+'.','>',,, //0x34 PERIOD
+'/','?',,, //0x35 SLASH, xKEYPAD '/'
+,,,, //0x36 RSHIFT
+,,,, //0x37 KEYPAD*, xPrtScn2
+,,,, //0x38 LALT, xRALT
+' ',,,, //0x39 SPACE
+,,,, //0x3A CAPSLOCK
+,,,, //0x3B F1
+,,,, //0x3C F2
+,,,, //0x3D F3
+,,,, //0x3E F4
+,,,, //0x3F F5
+
+,,,, //0x40 F6
+,,,, //0x41 F7
+,,,, //0x42 F8
+,,,, //0x43 F9
+,,,, //0x44 F10
+,,,, //0x45 NUMLOCK, xxPAUSE
+,,,, //0x46 SCROLL
+'7',,,, //0x47 KEYPAD 7, xHOME
+'8',,,, //0x48 KEYPAD 8, xUPARROW
+'9',,,, //0x49 KEYPAD 9, xPgUp
+'-',,,, //0x4A KEYPAD '-'
+'4',,,, //0x4B KEYPAD 4, xLEFTARROW
+'5',,,, //0x4C KEYPAD 5
+'6',,,, //0x4D KEYPAD 6, xRIGHTARROW
+'+',,,, //0x4E KEYPAD+
+'1',,,, //0x4F KEYPAD 1, xEND
+
+'2',,,, //0x50 KEYPAD 2, xDOWNARROW
+'3',,,, //0x51 KEYPAD 3, xPgDn
+'0',,,, //0x52 KEYPAD 0, xINSERT
+'.',,,, //0x53 KEYPAD '.' , xDELETE
+,,,, //0x54
+,,,, //0x55
+,,,, //0x56
+,,,, //0x57 F11
+,,,, //0x58 F12
+,,,, //0x59
+,,,, //0x5A
+,,,, //0x5B ,xLWINDOWS
+,,,, //0x5C xRWINDOWS
+,,,, //0x5D xMENU
+,,,, //0x5E xACPI POWER
+,,,, //0x5F xACPI SLEEP
+
+,,,, //0x60
+,,,, //0x61
+,,,, //0x62
+,,,, //0x63 xACPI WAKE
+,,,, //0x64
+,,,, //0x65
+,,,, //0x66
+,,,, //0x67
+,,,, //0x68
+,,,, //0x69
+,,,, //0x6A
+,,,, //0x6B
+,,,, //0x6C
+,,,, //0x6D
+,,,, //0x6E
+,,,, //0x6F
+
+,,,, //0x70
+,,,, //0x71
+,,,, //0x72
+,,,, //0x73
+,,,, //0x74
+,,,, //0x75
+,,,, //0x76
+,,,, //0x77
+,,,, //0x78
+,,,, //0x79
+,,,, //0x7A
+,,,, //0x7B
+,,,, //0x7C
+,,,, //0x7D
+,,,, //0x7E
+,,,, //0x7F
+};
