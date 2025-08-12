@@ -2,7 +2,7 @@
 
 Project68 is a Motorola MC68xxx single board computer with a PIC18F87K22 co-processor running uCLinux 4.4.
 
-It is self contained and connects directly to a monitor and keyboard.
+It connects directly to a monitor and keyboard and does not require a host computer.
 
 The goal was to create a self contained computer using a minimum number of components and tools.
 
