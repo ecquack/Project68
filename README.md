@@ -138,7 +138,7 @@ Note that the MC68008FN is no longer in production, but at this time (August, 20
 
 The schematic capture is all but complete. I'm planning to try the autorouter on this one, as I would find it tedious to hand route the large memory bus between the three main chips. 
 
-I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26K11 board that I milled on my CNC machine back in the day.
+I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26J11 board that I milled on my CNC machine back in the day.
 
 Once the layout is complete I plan to have assembled boards made for my by JLCPCB.
 
