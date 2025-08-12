@@ -1,6 +1,6 @@
 # Project68
 
-Project68 is a Motorola MC68xxx single board computer with a PIC18F87K22 co-processor running uCLinux 4.4.
+Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor running uCLinux 4.4.
 
 It connects directly to a monitor and keyboard and does not require a host computer.
 
