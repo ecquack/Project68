@@ -13,7 +13,7 @@ This project is at an early stage of development.
 
 It features:
 
-- MC68008 CPU clocked at 7.16 mHz
+- MC68008FN8 CPU clocked at 7.16 mHz
 - 4 megabytes of SRAM
 - Optional overclocking to 14.31818 mHz
 - PIC18F87K22 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
