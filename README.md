@@ -112,7 +112,9 @@ For programming the PIC MCU, this 6 pin connector contains PGD, PGC, _MCLR, +5V,
 
 ## PERFORMANCE NOTES
 
-For higher system performance you could use a second smaller PIC18 (such as a PIC18F27K22) dedicated to generating video. The current system was designed to see how simply a complete 68K computer system could be made, and it uses a minimum number of parts for a system that has its own video and keyboard interfaces. 
+The current system was designed to see how simply a complete 68K computer system could be made, and it uses a minimum number of parts for a system that has its own video and keyboard interfaces. By adding just a few chips you can dramatically increase the performance of the system.
+
+For higher overall system performance you could use a second smaller PIC18 (such as a PIC18F27K22) dedicated to generating video. Right now there is an I/O bottleneck because I/O operations are only performed during video blanking.
 
 A decoded address that causes an interrupt on the PIC18 would eliminate the need for the PIC18 to poll the MC68008's memory. Again, this would increase performance but it would add chips to the design and eat into the memory address space. Two 74HCT30s and a 74HCT00 would suffice, and would eat only 64 bytes from the memory map. 
 
