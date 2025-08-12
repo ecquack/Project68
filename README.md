@@ -16,7 +16,7 @@ It features:
 - 4 megabytes of SRAM
 - Optional overclocking to 14.31818 mHz
 - PIC18F87K22 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
-- 80x25 character black and white ASCII video display (NTSC composite video)
+- 80x25 character monochrome ASCII video display (NTSC composite video)
 - PS/2 keyboard interface
 - TTL serial port
 - micro-SD card socket
@@ -66,6 +66,8 @@ The HSYNC interrupt handler contains a single NOP instruction (for timing purpos
 
 Most of the co-processor's time is spent generating video. There is a short horizontal blanking period at the end of each line, and there is a longer vertical blanking interval at the end of each video field during which the processor is free to perform other tasks. All video generation (and PS/2 keyboard processing) takes place inside the interrupt handler.
 
+Note that it should be possible to run a PAL monitor instead of NTSC by simply adjusting the timing #DEFINE statements in the beginning of *80columnvideo.h*.
+I do not have a monitor that accepts PAL video to test this with.
 
 ## PS/2 INTERFACE
 
