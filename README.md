@@ -116,9 +116,11 @@ A decoded address that causes an interrupt on the PIC18 would eliminate the need
  
 - PIC programmer for initial programming (you can build a very simple bit-banging programmer using a repurposed Arduino)
 - Computer system with MicroSD card interface for preparing the SD card.
-- CCS PICC C Compiler (optional - pre-built binaries are available)
+- CCS PICC C Compiler (optional - pre-built binaries are available)*
 - X86 Linux system (optional - a pre-built binary is available)
 - KiCAD (optional - Gerber files are provided)
+
+*note that there is a 45 day free trial of this compiler.
 
 ## Pre-assembled boards
 
