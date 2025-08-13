@@ -15,7 +15,7 @@ It features:
 - MC68008FN8 CPU clocked at 7.16 mHz
 - 4 megabytes of SRAM
 - Optional overclocking to 14.31818 mHz
-- PIC18F87K22 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
+- PIC18F87J11 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
 - 80x25 character monochrome ASCII video display (NTSC composite video)
 - PS/2 keyboard interface
 - TTL serial port
@@ -43,11 +43,11 @@ The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns S
 
 The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 sourced from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, which is actually cheaper, but you will only be utilizing half the memory.
 
-The memory runs at 3.3 volts (there is an LDO regulator on the board) but the I/O pins are TTL compatible for interfacing with the PIC18 and MC68008, with a high logic level of 2.4 volts.
+The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the board). The MC68008  has a logic high level of 2.4 volts, which might be safe to use with these parts. I may end up using level shifters, but they eat 20 nanoseconds from the bus cycle. Stay tuned for my experimental results.
 
 ## CO-PROCESSSOR
 
-The PIC18F87K22 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
+The PIC18F87J11 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
 
 **The PIC18 co-processor provides all the main processor’s I/O using soft-DMA.** When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. A few specific addresses in the memory space are designated as I/O command and status registers and are interpreted as such by the co-processor to provide low level BIOS functions for the console, serial port, and SD card. 
 
