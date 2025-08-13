@@ -59,7 +59,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "STD_BUS_2100.kicad_prl",
+    "filename": "Project68.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
@@ -92,6 +92,8 @@
       11
     ],
     "col_widths": [
+      0,
+      0,
       0,
       0,
       0,
