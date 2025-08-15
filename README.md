@@ -47,7 +47,7 @@ The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns S
 
 The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 sourced from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, which is actually cheaper, but you will only be utilizing half the memory.
 
-The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the board). The 5V MC68008  has a logic high level of 2.4 volts, which might be safe to use with these parts. I may end up using level shifters, but they eat 20 nanoseconds from the bus cycle. Stay tuned for my experimental results.
+The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the board). The 5 volt MC68008  has a logic high level of 2.4 volts, which might be safe to use with these parts. I may end up using level shifters, but they eat 20 nanoseconds from the bus cycle. Stay tuned for my experimental results.
 
 ## CO-PROCESSSOR
 
