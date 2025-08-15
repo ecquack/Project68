@@ -51,7 +51,7 @@ The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the boar
 
 ## CO-PROCESSSOR
 
-The PIC18F87J11 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
+The PIC18F87J11 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It has 128K of FLASH memory, and just under 4K of on chip SRAM.
 
 **The PIC18 co-processor provides all the main processor’s I/O using soft-DMA.** When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. A few specific addresses in the memory space are designated as I/O command and status registers and are interpreted as such by the co-processor to provide low level BIOS functions for the console, serial port, and SD card. 
 
