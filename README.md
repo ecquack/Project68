@@ -1,16 +1,19 @@
 # Project68
 
-Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor. It runs uCLinux 4.4.
+Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor. 
 
-It connects directly to a monitor and keyboard and does not require a host computer.
+My goal was to do something interesting with the tube of factory new 68008 CPUs that I've been hoarding for 25 years, 
+so I have designed a useuful self contained 68K computer using a minumum number of components and special tools.
 
-The goal was to create a self contained 68K computer using a minimum number of components and tools.
+The system connects directly to a monitor and keyboard and does not require a host computer.
+
+This project is at an early stage of development, but it is intended to run uCLinux 4.4.
+
 
 Special thanks to [*crmaykish*](https://github.com/crmaykish), creator of the [Mackerel-68K](https://github.com/crmaykish/mackerel-68k) project.
 
-This project is at an early stage of development.
 
-It features:
+## Project68 features
 
 - MC68008FN8 CPU clocked at 7.16 mHz
 - 4 megabytes of SRAM
@@ -21,8 +24,9 @@ It features:
 - TTL serial port
 - micro-SD card socket
 - Audio Speaker for ASCII “bell” sound
-- No PAL/GAL/CPLD/FPGA programmable logic required
-- Only two TTL parts required.
+- **No PAL/GAL/CPLD/FPGA programmable logic required**
+- Only two LVTTL parts required.
+- Expansion ports for a dual serial card and a non-volatile RTC
 
 ## OPERATING REQUIREMENTS
 
