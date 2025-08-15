@@ -39,7 +39,7 @@ Special thanks to [*crmaykish*](https://github.com/crmaykish), creator of the [M
 
 The CPU is the 8 bit external bus version of the 68K, the MC68008FN8. It comes in the larger 52 pin PLCC package which can address up to 4 megabytes of memory. The CPU is socketed on the board so that you can use an automated assembly service such as JLC PCB or PCBWAY for all the soldering if you prefer. This is a 16/32 bit CPU internally with a narrow external bus which allows using byte wide external memories.
 
-The parts I have are rated at 8mHz, but 10mHz parts are also available (MC68000FN10). In order to provide an NTSC CCIR-601 video clock, the processor runs at ~7.16mHz. Either speed part can (usually) be successfully overclocked to ~14.318mHz without issue. An overclocking jumper is provided if you feel the need for speed.
+The parts I have are rated at 8mHz, but 10mHz parts are also available (MC68000FN10). In order to provide an NTSC video clock, the processor runs at ~7.16mHz. Either speed part can (usually) be successfully overclocked to ~14.318mHz without issue. An overclocking jumper is provided if you feel the need for speed.
 
 ## MEMORY
 
