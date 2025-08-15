@@ -101,10 +101,9 @@ The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to 
 The VPA line on the 68K bus is asserted whenever the processor executes a MOVEP instruction. While this is intended to interface with 6800 peripherals in conjunction with the E clock, this board uses the VPA signal to interrupt the PIC18 co-processor, signalling that a BIOS command is queued.
 
 
+## USB/TTL SERIAL PORT
 
-## USB SERIAL PORT
-
-A CH340N provides a very basic serial port connection to a host system. The USB connector also provides power to the board.
+A CH340N provides a very basic serial port connection to a USB host system. The USB C connector also provides power to the board. There is also a header with jumpers that allow the TTL serial lines to be disconnected from the USB chip and driven directly. 
 
 ## EXPANSION PORT
 
