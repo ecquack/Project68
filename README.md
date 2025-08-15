@@ -79,10 +79,7 @@ The interrupt handler runs during horizontal blanking, and always takes the same
 
 When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
 
-Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release. These limitations could be removed with a second PIC18 dedicated to the keyboard. 
-You can use the TTL serial port for the console if this limitation is an issue for you.
-
- 
+Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release. These limitations could be removed with a second PIC18 dedicated to the keyboard. These limitations can be removed by using a pure software approach to the interface, but for timing reasons this will not work with all keyboards. The PS/2 "standard" does not specify a clock rate, and different keyboard vendors use different rates. 
 
 ## SD CARD
 
