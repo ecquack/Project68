@@ -4,7 +4,7 @@ Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PI
 
 It connects directly to a monitor and keyboard and does not require a host computer.
 
-The goal was to create a self contained computer using a minimum number of components and tools.
+The goal was to create a self contained 68K computer using a minimum number of components and tools.
 
 Special thanks to [*crmaykish*](https://github.com/crmaykish), creator of the [Mackerel-68K](https://github.com/crmaykish/mackerel-68k) project.
 
