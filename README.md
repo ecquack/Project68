@@ -67,8 +67,6 @@ The physical video interface consists of two output pins and a two resistor netw
 
 The video display is not interlaced and does not include a colorburst. The 8x8 ROM font consists of the standard printable ASCII characters (codes 32-126), plus a number of special characters (codes 0-31 and 127). The upper 128 characters are reverse video of the lower 128 characters, which is used to generate the cursor. There are no fancy effects like blink, underscore, or dim. There are no code page 437 special characters.
 
-The HSYNC interrupt handler contains a single NOP instruction (for timing purposes) in the 8 instruction inner loop. There are are not enough spare clock cycles to add any more features.
-
 Most of the co-processor's time is spent generating video. There is a short horizontal blanking period at the end of each line, and there is a longer vertical blanking interval at the end of each video field during which the processor is free to perform other tasks. All video generation (and PS/2 keyboard processing) takes place inside the interrupt handler.
 
 Note that it should be possible to run a PAL monitor instead of NTSC by simply adjusting the timing #DEFINE statements in the beginning of *80columnvideo.h*.
