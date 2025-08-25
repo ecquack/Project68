@@ -77,7 +77,7 @@ I do not have a monitor that accepts PAL video to test this with.
 The system uses the PIC18 MSSP (synchronous serial port) in slave mode with an assembly language interrupt handler to interface to the PS/2 keyboard. 
 The interrupt handler runs during horizontal blanking, and always takes the same number of clock cycles to run, no matter which code path is taken, to avoid disturbing the video output. 
 
-When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
+When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, and stores the received characters into a software FIFO in SRAM.
 
 ## SD CARD
 
