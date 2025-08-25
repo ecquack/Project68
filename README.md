@@ -21,7 +21,7 @@ Special thanks to [*crmaykish*](https://github.com/crmaykish), creator of the [M
 - PIC18F87J11 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
 - 80x25 character monochrome ASCII video display (NTSC composite video)
 - PS/2 keyboard interface
-- TTL serial port
+- TTL/USB serial port
 - micro-SD card socket
 - Audio Speaker for ASCII “bell” sound
 - **No PAL/GAL/CPLD/FPGA programmable logic required**
@@ -89,24 +89,15 @@ The BIOS provides a few functions to access the console, the serial port, and th
 
 ## TIMER INTERRUPT
 
-The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to the 68008. This is used by the Linux kernel for timekeeping and task switching. 
-
-## VPA INTERRUPT
-
-The VPA line on the 68K bus is asserted whenever the processor executes a MOVEP instruction. While this is intended to interface with 6800 peripherals in conjunction with the E clock, this board uses the VPA signal to interrupt the PIC18 co-processor, signalling that a BIOS command is queued.
-
+The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to the 68008. This is used by the BIOS for communication and by the Linux kernel for timekeeping and task switching. 
 
 ## USB/TTL SERIAL PORT
 
-A CH340N provides a very basic serial port connection to a USB host system. The USB C connector also provides power to the board. There is also a header with jumpers that allow the TTL serial lines to be disconnected from the USB chip and driven directly. 
+A CH340N provides a very basic serial port connection to a USB host system. The USB C connector also provides power to the board. There is also a header with jumpers that allow the TTL serial lines to be disconnected from the USB chip and used directly. 
 
-## EXPANSION PORT
+## EXPANSION PORTS
 
-- TTL serial port (RX, TX, GND)
-- Power (+5V, +3.3V)
-- GPIO digital only (3) 
-- GPIO or analog input (4)
-- SPI BUS (shared with SD card)
+There are two expansion ports. Each has power, SPI bus, it's own SPI chip select, and two GPIO pins.
 
 ## ICSP PORT
 
