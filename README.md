@@ -1,16 +1,19 @@
 # Project68
 
-Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor. It runs uCLinux 4.4.
+Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor. 
 
-It connects directly to a monitor and keyboard and does not require a host computer.
+My goal was to do something interesting with the tube of factory new 68008 CPUs that I've been hoarding for 25 years, 
+so I have designed a useful self contained 68K computer using a minumum number of components and special tools.
 
-The goal was to create a self contained computer using a minimum number of components and tools.
+The system connects directly to a monitor and keyboard and does not require a host computer.
+
+This project is at an early stage of development, but it is intended to run uCLinux 4.4.
+
 
 Special thanks to [*crmaykish*](https://github.com/crmaykish), creator of the [Mackerel-68K](https://github.com/crmaykish/mackerel-68k) project.
 
-This project is at an early stage of development.
 
-It features:
+## Project68 features
 
 - MC68008FN8 CPU clocked at 7.16 mHz
 - 4 megabytes of SRAM
@@ -18,11 +21,12 @@ It features:
 - PIC18F87J11 co-processor clocked at 14.31818 mHz (57.27 mHz internal w/4X PLL)
 - 80x25 character monochrome ASCII video display (NTSC composite video)
 - PS/2 keyboard interface
-- TTL serial port
+- TTL/USB serial port
 - micro-SD card socket
 - Audio Speaker for ASCII “bell” sound
-- No PAL/GAL/CPLD/FPGA programmable logic required
-- Only two TTL parts required.
+- **No PAL/GAL/CPLD/FPGA programmable logic required**
+- Only two LVTTL parts required.
+- Expansion ports for a dual serial card and a non-volatile RTC
 
 ## OPERATING REQUIREMENTS
 
@@ -35,7 +39,7 @@ It features:
 
 The CPU is the 8 bit external bus version of the 68K, the MC68008FN8. It comes in the larger 52 pin PLCC package which can address up to 4 megabytes of memory. The CPU is socketed on the board so that you can use an automated assembly service such as JLC PCB or PCBWAY for all the soldering if you prefer. This is a 16/32 bit CPU internally with a narrow external bus which allows using byte wide external memories.
 
-The parts I have are rated at 8mHz, but 10mHz parts are also available (MC68000FN10). In order to provide an NTSC CCIR-601 video clock, the processor runs at ~7.16mHz. Either speed part can (usually) be successfully overclocked to ~14.318mHz without issue. An overclocking jumper is provided if you feel the need for speed.
+The parts I have are rated at 8mHz, but 10mHz parts are also available (MC68000FN10). In order to provide an NTSC video clock, the processor runs at ~7.16mHz. Either speed part can (usually) be successfully overclocked to ~14.318mHz without issue. An overclocking jumper is provided if you feel the need for speed.
 
 ## MEMORY
 
@@ -43,11 +47,11 @@ The system has four megabytes of memory. It uses a single 32 megabit 4Mx8 55ns S
 
 The SRAM part is a fairly pricey Renesas RMLV3216AGSA-5S2 sourced from Digikey. You can also use the pin compatible Alliance AS6C6416-55TIN from Mouser which is a 64 megabit part, which is actually cheaper, but you will only be utilizing half the memory.
 
-The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the board). The MC68008  has a logic high level of 2.4 volts, which might be safe to use with these parts. I may end up using level shifters, but they eat 20 nanoseconds from the bus cycle. Stay tuned for my experimental results.
+The memory and the PIC18 run at 3.3 volts (there is an LDO regulator on the board). The 5 volt MC68008  has a logic high level of 2.4 volts, which might be safe to use with these parts. I may end up using level shifters, but they eat 20 nanoseconds from the bus cycle. Stay tuned for my experimental results.
 
 ## CO-PROCESSSOR
 
-The PIC18F87J11 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It runs at 5 volts, has 128K of FLASH memory, and has just under 4K of on chip SRAM.
+The PIC18F87J11 microcontroller comes in an 80 pin TQFP package. This part was chosen because it has enough GPIO pins to emulate the entire MC68008 bus. It has 128K of FLASH memory, and just under 4K of on chip SRAM.
 
 **The PIC18 co-processor provides all the main processor’s I/O using soft-DMA.** When it is time to transfer data to or from the processor, the co-processor requests the bus from the 68008. When the bus is granted, it uses bit-banging DMA to read and write the SRAM. A few specific addresses in the memory space are designated as I/O command and status registers and are interpreted as such by the co-processor to provide low level BIOS functions for the console, serial port, and SD card. 
 
@@ -63,8 +67,6 @@ The physical video interface consists of two output pins and a two resistor netw
 
 The video display is not interlaced and does not include a colorburst. The 8x8 ROM font consists of the standard printable ASCII characters (codes 32-126), plus a number of special characters (codes 0-31 and 127). The upper 128 characters are reverse video of the lower 128 characters, which is used to generate the cursor. There are no fancy effects like blink, underscore, or dim. There are no code page 437 special characters.
 
-The HSYNC interrupt handler contains a single NOP instruction (for timing purposes) in the 8 instruction inner loop. There are are not enough spare clock cycles to add any more features.
-
 Most of the co-processor's time is spent generating video. There is a short horizontal blanking period at the end of each line, and there is a longer vertical blanking interval at the end of each video field during which the processor is free to perform other tasks. All video generation (and PS/2 keyboard processing) takes place inside the interrupt handler.
 
 Note that it should be possible to run a PAL monitor instead of NTSC by simply adjusting the timing #DEFINE statements in the beginning of *80columnvideo.h*.
@@ -75,12 +77,7 @@ I do not have a monitor that accepts PAL video to test this with.
 The system uses the PIC18 MSSP (synchronous serial port) in slave mode with an assembly language interrupt handler to interface to the PS/2 keyboard. 
 The interrupt handler runs during horizontal blanking, and always takes the same number of clock cycles to run, no matter which code path is taken, to avoid disturbing the video output. 
 
-When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, stores the received characters into the SRAM, and generates a MC68008 interrupt.
-
-Due to hardware limitations of the MSSP (7 bits instead of 8 due to the start bit) certain scan codes on a standard keyboard are not readable or do not work as expected. In particular, the F5 and F7 keys cannot be distinguished from one another, and the zero/insert key on the numeric keypad is registered only on release. These limitations could be removed with a second PIC18 dedicated to the keyboard. 
-You can use the TTL serial port for the console if this limitation is an issue for you.
-
- 
+When characters arrive on the PS/2 keyboard or serial port, the co-processor requests the bus, and stores the received characters into a software FIFO in SRAM.
 
 ## SD CARD
 
@@ -92,19 +89,15 @@ The BIOS provides a few functions to access the console, the serial port, and th
 
 ## TIMER INTERRUPT
 
-The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to the 68008. This is used by the Linux kernel for timekeeping and task switching. 
+The vertical blanking signal serves as a periodic timer interrupt (60 hertz) to the 68008. This is used by the BIOS for communication and by the Linux kernel for timekeeping and task switching. 
 
-## USB SERIAL PORT
+## USB/TTL SERIAL PORT
 
-A CH340N provides a very basic serial port connection to a host system. The USB connector also provides power to the board.
+A CH340N provides a very basic serial port connection to a USB host system. The USB C connector also provides power to the board. There is also a header with jumpers that allow the TTL serial lines to be disconnected from the USB chip and used directly. 
 
-## EXPANSION PORT
+## EXPANSION PORTS
 
-- TTL serial port (RX, TX, GND)
-- Power (+5V, +3.3V)
-- GPIO digital only (3) 
-- GPIO or analog input (4)
-- SPI BUS (shared with SD card)
+There are two expansion ports. Each has power, SPI bus, it's own SPI chip select, it's own interrupt line, and two GPIO pins. My intention is to use an SPI DUAL UART on one port and an SPI RTC on the other. Supporting these will require additions to the BIOS. The interrupt line and the chip select can be used as GPIOs if the SPI bus is not used, but MISO, MOSI, and SCLK are shared with the SD card socket and cannot be reassigned.
 
 ## ICSP PORT
 
