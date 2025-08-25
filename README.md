@@ -3,7 +3,7 @@
 Project68 is a Motorola MC68xxx 16/32 bit single board computer with an 8 bit PIC18 co-processor. 
 
 My goal was to do something interesting with the tube of factory new 68008 CPUs that I've been hoarding for 25 years, 
-so I have designed a useuful self contained 68K computer using a minumum number of components and special tools.
+so I have designed a useful self contained 68K computer using a minumum number of components and special tools.
 
 The system connects directly to a monitor and keyboard and does not require a host computer.
 
