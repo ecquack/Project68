@@ -12775,7 +12775,7 @@
 		)
 		(uuid "fd383b08-edd3-4f4d-8c41-71954fe19bda")
 	)
-	(label "PS{slash}2DATA"
+	(label "PS2_DATA"
 		(at 180.34 118.11 0)
 		(effects
 			(font
@@ -13175,7 +13175,7 @@
 		)
 		(uuid "3bc82433-b9d9-4807-bfe8-b298a139c26a")
 	)
-	(label "PS2{slash}CLK"
+	(label "PS2_CLK"
 		(at 90.17 125.73 0)
 		(effects
 			(font
@@ -13305,7 +13305,7 @@
 		)
 		(uuid "4a09b71d-e254-4600-b5cc-21b53b04c2d2")
 	)
-	(label "SER_IRQ"
+	(label "~{SER_IRQ}"
 		(at 238.76 161.29 0)
 		(effects
 			(font
@@ -14105,7 +14105,7 @@
 		)
 		(uuid "b3021a90-74da-4c65-8db3-ad6de2e35417")
 	)
-	(label "AUX_IRQ"
+	(label "~{AUX_IRQ}"
 		(at 201.93 162.56 0)
 		(effects
 			(font
@@ -14545,7 +14545,7 @@
 		)
 		(uuid "e400cfbd-b7c2-4ebe-9965-5320b80fc352")
 	)
-	(label "AUX_IRQ"
+	(label "~{AUX_IRQ}"
 		(at 90.17 110.49 0)
 		(effects
 			(font
@@ -15348,7 +15348,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 316.23 194.818 90)
 			(effects
 				(font
@@ -17006,7 +17006,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Vertical"
 			(at 370.84 209.55 0)
 			(effects
 				(font
@@ -17283,7 +17283,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 199.39 46.99 0)
 			(effects
 				(font
@@ -20066,7 +20066,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
 			(at 316.23 197.358 90)
 			(effects
 				(font
