@@ -1,4 +1,4 @@
-25285693114827405
+25292718945800448
 AS6C1008-55PCN
 DIP1524W45P254L4191H419Q32
 
@@ -6,6 +6,13 @@ DIP1524W45P254L4191H419Q32
 0
 32
 32
+ATF1508ASL-25AU100
+QFP50P1600X1600X120-100N
+
+
+0
+100
+100
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -101353,12 +101360,33 @@ equack
 4
 3
 equack
+EDGE52-pins
+
+
+0
+56
+56
+equack
+EDGE56-pins
+
+
+0
+56
+56
+equack
 EggLogo
 
 
 0
 0
 0
+equack
+MURATA
+
+
+0
+2
+2
 equack
 SJ1S-61 Relay Socket
 
