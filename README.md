@@ -97,7 +97,9 @@ A CH340N provides a very basic serial port connection to a USB host system. The 
 
 ## EXPANSION PORTS
 
-There are two expansion ports. Each has power, SPI bus, it's own SPI chip select, it's own interrupt line, and two GPIO pins. My intention is to use an SPI DUAL UART on one port and an SPI RTC on the other. Supporting these will require additions to the BIOS. The interrupt line and the chip select can be used as GPIOs if the SPI bus is not used, but MISO, MOSI, and SCLK are shared with the SD card socket and cannot be reassigned.
+There are two main expansion ports. Each has power, SPI bus, it's own SPI chip select, it's own interrupt line, and two GPIO pins. My intention is to use an SPI DUAL UART on one port and an SPI RTC on the other. Supporting these will require additions to the BIOS. The interrupt line and the chip select can be used as GPIOs if the SPI bus is not used, but MISO, MOSI, and SCLK are shared with the SD card socket and cannot be reassigned.
+
+There is also a third expansion port which brings out the three unused PIC18 GPIO pins, power, and ground. Two of these pins are on port B and can be used as interrupt sources.
 
 ## ICSP PORT
 
