@@ -97,7 +97,9 @@ A CH340N provides a very basic serial port connection to a USB host system. The 
 
 ## EXPANSION PORTS
 
-There are two expansion ports. Each has power, SPI bus, it's own SPI chip select, it's own interrupt line, and two GPIO pins. My intention is to use an SPI DUAL UART on one port and an SPI RTC on the other. Supporting these will require additions to the BIOS. The interrupt line and the chip select can be used as GPIOs if the SPI bus is not used, but MISO, MOSI, and SCLK are shared with the SD card socket and cannot be reassigned.
+There are two main expansion ports. Each has power, SPI bus, it's own SPI chip select, it's own interrupt line, and two GPIO pins. My intention is to use an SPI DUAL UART on one port and an SPI RTC on the other. Supporting these will require additions to the BIOS. The interrupt line and the chip select can be used as GPIOs if the SPI bus is not used, but MISO, MOSI, and SCLK are shared with the SD card socket and cannot be reassigned.
+
+There is also a third expansion port which brings out the three unused PIC18 GPIO pins, power, and ground. Two of these pins are on port B and can be used as interrupt sources.
 
 ## ICSP PORT
 
@@ -131,7 +133,7 @@ Note that the MC68008FN is no longer in production, but at this time (August, 20
 
 ## PROJECT STATUS
 
-The schematic capture is all but complete. I'm planning to try the autorouter on this one, as I would find it tedious to hand route the large memory bus between the three main chips. 
+The schematic capture and layout of the first version is complete. I'll order the blank boards and stencil from JLCPCB next.
 
 I wrote the PIC18 80 column video code and the PS/2 keyboard handler code back in 2010 and posted them to the CCS C compiler forum. They were tested on a single sided PIC18F26J11 board that I milled on my CNC machine back in the day.
 
